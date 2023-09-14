@@ -5,11 +5,14 @@ import {
   Post,
   Res,
   ValidationPipe,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 import { AuthService } from './auth.service';
 import { AuthResponse } from './user.repository';
 import { Response } from 'express';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -49,5 +52,11 @@ export class AuthController {
         res.status(HttpStatus.BAD_REQUEST).json(response);
       }
     }
+  }
+
+  @Post('/test')
+  @UseGuards(AuthGuard())
+  test(@Req() req) {
+    console.log(req.user);
   }
 }

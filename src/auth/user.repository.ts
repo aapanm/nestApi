@@ -8,6 +8,7 @@ export interface AuthResponse {
   success: boolean;
   id?: number;
   username?: string;
+  accessToken?: string;
   message: string;
 }
 
